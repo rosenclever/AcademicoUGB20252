@@ -3,6 +3,7 @@ using Academico.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academico.Migrations
 {
     [DbContext(typeof(AcademicoContext))]
-    partial class AcademicoContextModelSnapshot : ModelSnapshot
+    [Migration("20251111235342_instituicao-departamento")]
+    partial class instituicaodepartamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +68,7 @@ namespace Academico.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InstituicaoId")
+                    b.Property<int>("InstituicaoOrigemInstituicaoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -78,7 +81,7 @@ namespace Academico.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InstituicaoId");
+                    b.HasIndex("InstituicaoOrigemInstituicaoId");
 
                     b.ToTable("Departamentos");
                 });
@@ -108,7 +111,7 @@ namespace Academico.Migrations
                 {
                     b.HasOne("Academico.Models.Instituicao", "InstituicaoOrigem")
                         .WithMany()
-                        .HasForeignKey("InstituicaoId")
+                        .HasForeignKey("InstituicaoOrigemInstituicaoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
